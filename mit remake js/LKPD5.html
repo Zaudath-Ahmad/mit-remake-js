@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EKSPERIMEN 3</title>
+</head>
+<body>
+
+    <style>
+
+        .body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* background-color: aquamarine; */
+            height: 100vh;
+
+        }
+
+        .tittle {
+            font-size: 25px;
+        }
+
+        .layout-vertikal {
+            /* background-color: aqua; */
+            height: 40vw;
+            width: 55vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container-input {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            width: 300px;
+            /* background-color: bisque; */
+        }
+
+    </style>
+    <div class="body">
+        <div class="layout-vertikal">
+            <h1 class="tittle">SOAL JALAN TOL</h1>
+            <div class="keterangan">
+                <b>jarak :</b>
+                <p> A-B = 15 </p>
+                <p> B-C = 20</p>
+                <p> C-D = 35</p>
+                <p> D-E = 40</p>
+                <p>setiap jarak dikalikan 5000 dan akan ditambahkan harga dari setiap golongan <br> <br> GOL I = 5000 <br> GOL II = 10000 <br> GOL III = 15000 <br> GOL IV = 20000 <br> GOL V = 25000 </p>
+            </div>
+            <h1>HASIL :</h1>
+            <form class="container-input">
+                <label>NOMOR KENDARAAN</label>
+                <input type="text" id="numInput">
+                <label>GOLONGAN</label>
+                <select id="golongan">
+                    <option value="5000" id="i">I</option>
+                    <option value="10000" id="ii">II</option>
+                    <option value="15000" id="iii">III</option>
+                    <option value="20000" id="iv">IV</option>
+                    <option value="25000" id="v">V</option>
+                </select>
+                <label>MASUK</label>
+                <select id="masuk">
+                    <option id="a">A</option>
+                    <option id="b">B</option>
+                    <option id="c">C</option>
+                    <option id="d">D</option>
+                    <option id="e">E</option>
+                </select>
+                <label>KELUAR</label>
+                <select id="keluar">
+                    <option id="a">A</option>
+                    <option id="b">B</option>
+                    <option id="c">C</option>
+                    <option id="d">D</option>
+                    <option id="e">E</option>
+                </select>
+                <button type="button" id="btnCo">CHECKOUT</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded',function () {
+            var a = [5000, 10000, 15000, 20000, 25000];
+            var b =  [0, 15, 20, 35, 40];
+            var c =  [0, 15, 20, 35, 40];
+            var selectedIndex;
+            
+            function updateConsoleLog() {
+                var selectElementGolongan = document.getElementById('golongan');
+                var selectElementMasuk = document.getElementById('masuk');
+                var selectElementKeluar = document.getElementById('keluar');
+                
+                selectedIndexGol = selectElementGolongan.selectedIndex;
+                // console.log("Select value : ", a[selectedIndexGol]);
+
+                selectedIndexIn = selectElementMasuk.selectedIndex;
+                // console.log("Select value : ", b[selectedIndexIn]);
+
+                selectedIndexOut = selectElementKeluar.selectedIndex;
+                // console.log("Select value : ", c[selectedIndexOut]);
+            }
+
+            updateConsoleLog();
+
+            document.getElementById('golongan').addEventListener('change', updateConsoleLog)
+            document.getElementById('masuk').addEventListener('change', updateConsoleLog);
+            document.getElementById('keluar').addEventListener('change', updateConsoleLog);
+
+            function showArrayInAlert() {
+                if (selectedIndexOut !== undefined) {
+                    var inputValue = document.getElementById('numInput').value;
+                    var gol = a[selectedIndexGol];
+                    var masuk = b[selectedIndexIn];
+                    var keluar = c[selectedIndexOut];
+                    var indexMasuk = selectedIndexIn;
+                    var indexKeluar = selectedIndexOut;
+                    var indexGol = selectedIndexGol;
+                    var totalJarak;
+                    var totalHarga;
+                    var hasilFor = 0;
+                    var textGol = document.getElementById('golongan').options[selectedIndexGol].text;
+                    console.log(textGol)
+                    // alert(`${gol} \n${masuk} \n${keluar}`);
+
+                    if (masuk === keluar ) {
+                        console.log(0);
+                        alert(0)
+                    }
+                    else {
+                        if (indexMasuk > indexKeluar) {
+                            if (indexMasuk - indexKeluar === 1) {
+                                totalJarak = masuk;
+                                totalHarga = totalJarak * 5000 + gol;
+                                alert(`Nomor Kendaraan = ${inputValue}\nGolongan = ${textGol} (${gol})\nJarak = ${totalJarak}Km\nHarga = Rp${totalHarga}`)
+                                console.log("harga :", totalJarak * 5000 + gol);
+                            }
+                            else {
+                                for (var i = indexKeluar; i <= indexMasuk; i++) {
+                                totalJarak = hasilFor += b[i];
+                                totalHarga = totalJarak * 5000 + gol;
+                            }
+                                // console.log("totalIndex :", hasilFor);
+                                alert(`Nomor Kendaraan = ${inputValue}\nGolongan = ${textGol} (${gol})\nJarak = ${totalJarak}Km\nHarga = Rp${totalHarga}`)
+                                console.log("harga :", totalJarak * 5000 + gol);
+                            }
+                        }
+                        else if (indexKeluar > indexMasuk) {
+                            if (indexKeluar - indexMasuk === 1) {
+                                totalJarak = keluar;
+                                totalHarga = totalJarak * 5000 + gol;
+                                alert(`Nomor Kendaraan = ${inputValue}\nGolongan = ${textGol} (${gol})\nJarak = ${totalJarak}Km\nHarga = Rp${totalHarga}`)
+                                console.log("harga :", totalJarak * 5000 + gol);
+                            }
+                            else {
+                                for (var i = indexMasuk; i <= indexKeluar; i++) {
+                                    totalJarak = hasilFor += b[i];
+                                    totalHarga = totalJarak * 5000 + gol;
+                                }
+                                // console.log("totalIndex :", hasilFor);
+                                alert(`Nomor Kendaraan = ${inputValue}\nGolongan = ${textGol} (${gol})\nJarak = ${totalJarak}Km\nHarga = Rp${totalHarga}`)
+                                console.log("harga :", totalJarak * 5000 + gol);
+                            }
+                        }
+                    }
+                }
+                else {
+                    console.log(0);
+                }
+            }
+
+            document.getElementById('btnCo').addEventListener('click', showArrayInAlert);
+        });
+
+    </script>
+
+</body>
+</html>

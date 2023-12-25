@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console.log Judul Opsi</title>
+</head>
+<body>
+
+    <label for="mySelect">Pilih Judul:</label>
+    <select id="mySelect" onchange="showSelectedTitle()">
+        <option value="judul1">Judul 1</option>
+        <option value="judul2">Judul 2</option>
+        <option value="judul3">Judul 3</option>
+    </select>
+
+    <script>
+        function showSelectedTitle() {
+            // Mendapatkan elemen dropdown
+            const dropdown = document.getElementById('mySelect');
+
+            // Mendapatkan indeks opsi yang dipilih
+            const selectedIndex = dropdown.selectedIndex;
+
+            // Mendapatkan teks dari opsi yang dipilih
+            const selectedTitle = dropdown.options[selectedIndex].text;
+
+            // Menampilkan teks di console.log
+            console.log('Judul yang dipilih:', selectedTitle);
+        }
+    </script>
+
+</body>
+</html>
